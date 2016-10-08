@@ -1,0 +1,39 @@
+service: trello-bot
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-plugin-write-env-vars
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+custom:
+  webpackIncludeModules: true # enable auto including modules
+  projectName: trello-bot
+  writeEnvVars:
+    TWILIO_AUTH_TOKEN: c294fbe2a3a569a6c8bbb252907caf4e
+    TWILIO_ACCOUNT_SID: AC7f2597de5522211f22ad0b7cdaea90b5
+    TWILIO_TEST_ACCOUNT_SID: ACd0807747a9df8c111f1f021f642b23c2
+    TWILIO_TEST_AUTH_TOKEN: 15c6d448c2e7daca5a8a2e1d7496ef01
+    TWILIO_NUMBER: +15146125723
+    TRELLO_API_KEY: 6966f4a89b7ae443377bf4b094bc8dd7
+    TRELLO_API_SECRET: c33206624f5acc2789cd6e01c706ae180703e59cd5b5735e51f61cbdb2ee353e
+    TRELLO_API_TOKEN: a856761defa8afb4da2abd267c2b8111eaae684a4c93705bd2149a405d6aa093
+    WEATHER_API_KEY: 0072c3e19fed421306eb3978c8b3d18a
+
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          method: GET
+          path: hello
+  twilioReceiveMessage:
+    handler: handler.receiveMessage
+    events:
+      - http:
+          method: POST
+          path: twilio/message
