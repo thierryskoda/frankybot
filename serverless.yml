@@ -1,4 +1,4 @@
-service: trello-bot
+service: personnal-bot
 
 # Add the serverless-webpack plugin
 plugins:
@@ -18,11 +18,12 @@ custom:
     TWILIO_TEST_ACCOUNT_SID: ACd0807747a9df8c111f1f021f642b23c2
     TWILIO_TEST_AUTH_TOKEN: 15c6d448c2e7daca5a8a2e1d7496ef01
     TWILIO_NUMBER: +15146125723
-    TRELLO_API_KEY: 6966f4a89b7ae443377bf4b094bc8dd7
+    TRELLO_API_KEY: <6966f4a89b7ae4433></6966f4a89b7ae4433>77bf4b094bc8dd7
     TRELLO_API_SECRET: c33206624f5acc2789cd6e01c706ae180703e59cd5b5735e51f61cbdb2ee353e
     TRELLO_API_TOKEN: a856761defa8afb4da2abd267c2b8111eaae684a4c93705bd2149a405d6aa093
     WEATHER_API_KEY: 0072c3e19fed421306eb3978c8b3d18a
-
+    FACEBOOK_PAGE_ACCESS_TOKEN: EAALoR1FU8ycBAPts7qK7Qs0RdkWXZBdPXGZBBbO2jXXAK0whcIk8rPajoRlNLRU3Vt3Vcpfc1UB33iIzM78A5LvwazZAZA8ZBaQ99F2ATbhVZA29JtffCZAMAPem9rc1eRDvuamey2QYMZB1yo04Rb2FReUjwoHgSmUho6Dba76sEgZDZD
+    FACEBOOK_VALIDATION_TOKEN: thierryskoda
 
 functions:
   hello:
@@ -32,8 +33,20 @@ functions:
           method: GET
           path: hello
   twilioReceiveMessage:
-    handler: handler.receiveMessage
+    handler: handler.receiveTwilioMessage
     events:
       - http:
           method: POST
           path: twilio/message
+  FacebookReceiveMessage:
+    handler: handler.receiveFacebookMessage
+    events:
+      - http:
+          method: POST
+          path: facebook/message
+  FacebookValidateToken:
+    handler: handler.validateFacebookToken
+    events:
+      - http:
+          method: GET
+          path: facebook/message

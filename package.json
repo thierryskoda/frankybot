@@ -1,11 +1,14 @@
 {
-  "name": "twilio-bot",
+  "name": "personal-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "My personal that executes everything that I tell him to do",
   "main": "handler.js",
   "dependencies": {
+    "babel-runtime": "^6.11.6",
+    "botkit": "^0.4.0",
     "dotenv": "^2.0.0",
     "node-emoji": "^1.4.1",
+    "node-wit": "git+https://github.com/laardee/node-wit.git",
     "request-promise": "^4.1.1",
     "serverless-plugin-write-env-vars": "^1.0.1",
     "trello": "^0.5.1",
@@ -33,9 +36,14 @@
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node handler.js"
+    "twilio": "serverless webpack invoke -f twilioReceiveMessage -p local.input.twilio.json",
+    "facebook": "serverless webpack invoke -f FacebookReceiveMessage -p local.input.facebook.json",
+    "dev": "serverless webpack serve",
+    "start": "serverless webpack serve",
+    "logs-tw": "serverless logs -f twilioReceiveMessage",
+    "logs-fb": "serverless logs -f FacebookReceiveMessage",
+    "deploy": "serverless deploy"
   },
-  "author": "",
+  "author": "Thierry Skoda",
   "license": "ISC"
 }

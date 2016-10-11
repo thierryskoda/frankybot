@@ -5,11 +5,6 @@ module.exports = {
   target: 'node',
   externals: [nodeExternals()], // exclude external modules
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: __dirname,
-      exclude: /node_modules/,
-    }]
+    loaders: [{ test: /\.js$/, loaders: ['babel'], include: __dirname, exclude: /node_modules/ }]
   }
 };
